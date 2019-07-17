@@ -1,0 +1,45 @@
+#:kivy 1.11.1
+
+<ItemButton@Button>:
+	font_size: '20sp'
+
+<Container>:
+	rows: 5
+	padding: 10
+
+	start_b: start_button
+	cancel_b: cancel_button
+	time_view: watch_stop
+
+	Label:
+		id: watch_stop
+		font_size: 40
+		text: "0:0:0"
+
+	GridLayout:
+		cols: 2
+
+		ItemButton:
+			id: start_button
+			text: "Старт"
+
+			on_release:
+				root.start_click()
+
+		ItemButton:
+			id: cancel_button 
+			text: "Сброс"
+
+			on_release:
+				root.break_time()
+
+	AnchorLayout:
+		TextInput:
+			size_hint: 1, 0.7
+			multiline: False
+
+	ItemButton:
+		text: "Сохранить"
+
+	ItemButton:
+		text: "Архив"
