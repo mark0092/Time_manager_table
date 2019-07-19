@@ -6,6 +6,11 @@ from kivy.core.window import Window
 
 Window.size = (480,853)
 
+#from kivy.config import config
+#Config.set('kivy', 'keyboard_mode', 'systemanddock')
+
+from kivymd.theming import  ThemeManager
+
 class Container(GridLayout):
 	clock_time = NumericProperty(0.0)
 	event = None
@@ -21,7 +26,7 @@ class Container(GridLayout):
 		self.lock_time() 
 
 	def break_time(self):
-		self.start_b.text = "Старт"
+		self.start_b.text = "Start"
 		if (self.event != None):
 			self.event.cancel()
 			self.event = None
@@ -29,18 +34,21 @@ class Container(GridLayout):
 		self.lock_time()
 
 	def start_click(self):
-		if (self.start_b.text == "Старт"):
-			self.start_b.text = "Пауза"
+		if (self.start_b.text == "Start"):
+			self.start_b.text = "Pause"
 			self.event = Clock.schedule_interval(self.time_up, 0.5)
 		else:
-			self.start_b.text = "Старт"
+			self.start_b.text = "Start"
 			if (self.event != None):
 				self.event.cancel()
 				self.event = None
 			self.lock_time()
 
 class TmApp(App):
+	theme_cls = ThemeManager()
+	title = 'Coppa app'
 	def build(self):
+		self.theme_cls.theme_style = 'Light'
 		cont = Container()
 		return cont
 

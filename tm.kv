@@ -1,45 +1,57 @@
 #:kivy 1.11.1
+#:import MDLabel kivymd.label.MDLabel
+#:import MDTextField kivymd.textfields.MDTextField
+#:import MDRaisedButton kivymd.button.MDRaisedButton
 
-<ItemButton@Button>:
+<ItemButton@MDRaisedButton>:
 	font_size: '20sp'
 
 <Container>:
-	rows: 5
+	rows: 6
 	padding: 10
+	spacing: '10dp'
 
 	start_b: start_button
 	cancel_b: cancel_button
 	time_view: watch_stop
 
-	Label:
+	MDLabel:
 		id: watch_stop
-		font_size: 40
+		size_hint: (1, 0.35)
+		halign: 'center'
+		font_size: 50
 		text: "0:0:0"
+		color: (0, 0, 0, 1)
 
 	GridLayout:
 		cols: 2
-
+		spacing: '10dp'
+		size_hint: (1, 0.15)
 		ItemButton:
 			id: start_button
-			text: "Старт"
+			size_hint: (1, 1)
+			text: "Start"
 
 			on_release:
 				root.start_click()
 
 		ItemButton:
 			id: cancel_button 
-			text: "Сброс"
+			size_hint: (1, 1)
+			text: "Cancel"
 
 			on_release:
 				root.break_time()
 
 	AnchorLayout:
-		TextInput:
-			size_hint: 1, 0.7
+		MDTextField:
 			multiline: False
 
 	ItemButton:
-		text: "Сохранить"
+		size_hint: (1, 0.15)
+		text: "Save"
+
 
 	ItemButton:
-		text: "Архив"
+		size_hint: (1, 0.15)
+		text: "Archive"
