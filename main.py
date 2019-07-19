@@ -1,4 +1,6 @@
 from kivy.app import App
+from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.gridlayout import GridLayout
 from kivy.properties import NumericProperty, ReferenceListProperty
 from kivy.clock import Clock
@@ -11,7 +13,7 @@ Window.size = (480,853)
 
 from kivymd.theming import  ThemeManager
 
-class Container(GridLayout):
+class Container(Screen):
 	clock_time = NumericProperty(0.0)
 	event = None
 
@@ -44,13 +46,19 @@ class Container(GridLayout):
 				self.event = None
 			self.lock_time()
 
+class Archive(Screen):
+	pass
+
+
 class TmApp(App):
 	theme_cls = ThemeManager()
-	title = 'Coppa app'
+	title = 'Time manager'
 	def build(self):
+		sm = ScreenManager()
+		sm.add_widget(Container(name='menu'))
+		sm.add_widget(Archive(name='archive'))
 		self.theme_cls.theme_style = 'Light'
-		cont = Container()
-		return cont
+		return sm
 
 
 if __name__ == '__main__':

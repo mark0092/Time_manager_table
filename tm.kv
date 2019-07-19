@@ -7,51 +7,64 @@
 	font_size: '20sp'
 
 <Container>:
-	rows: 6
-	padding: 10
-	spacing: '10dp'
 
 	start_b: start_button
 	cancel_b: cancel_button
 	time_view: watch_stop
-
-	MDLabel:
-		id: watch_stop
-		size_hint: (1, 0.35)
-		halign: 'center'
-		font_size: 50
-		text: "0:0:0"
-		color: (0, 0, 0, 1)
-
+	
 	GridLayout:
-		cols: 2
+		rows: 6
+		padding: 10
 		spacing: '10dp'
-		size_hint: (1, 0.15)
+
+		MDLabel:
+			id: watch_stop
+			size_hint: (1, 0.65)
+			halign: 'center'
+			font_size: 50
+			text: "0:0:0"
+			color: (0, 0, 0, 1)
+
+		GridLayout:
+			cols: 2
+			spacing: '10dp'
+			size_hint: (1, 0.18)
+			ItemButton:
+				id: start_button
+				size_hint: (1, 1)
+				text: "Start"
+
+				on_release: root.start_click()
+
+			ItemButton:
+				id: cancel_button 
+				size_hint: (1, 1)
+				text: "Cancel"
+
+				on_release: root.break_time()
+
+		AnchorLayout:
+			MDTextField:
+				multiline: False
+				hint_text: 'Numbers of exercises/questions etc.' 
+
 		ItemButton:
-			id: start_button
-			size_hint: (1, 1)
-			text: "Start"
+			size_hint: (1, 0.18)
+			text: "Save"
 
-			on_release:
-				root.start_click()
 
 		ItemButton:
-			id: cancel_button 
-			size_hint: (1, 1)
-			text: "Cancel"
+			size_hint: (1, 0.18)
+			text: "Archive"
 
-			on_release:
-				root.break_time()
-
-	AnchorLayout:
-		MDTextField:
-			multiline: False
-
-	ItemButton:
-		size_hint: (1, 0.15)
-		text: "Save"
+			on_release: root.manager.current = 'archive'
 
 
-	ItemButton:
-		size_hint: (1, 0.15)
-		text: "Archive"
+<Archive>:
+	GridLayout:
+		rows: 3
+		MDRaisedButton:
+			size_hint: (1, 0.18)
+			text: 'Return'
+
+			on_release: root.manager.current = 'menu'
